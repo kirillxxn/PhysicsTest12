@@ -3,24 +3,20 @@ import styles from './Question.module.css'
 
 type QuestionProps = {
 	question: {
-		id: string
 		number: number
 		text: string
 		imageUrl?: string
 		options: Array<{ label: string; value: number }>
 		physicalQuantities: [string, string]
-		correctAnswer: [number, number]
 	}
 	answer: [number, number]
 	onAnswerChange: (answer: [number, number]) => void
-	showCorrectAnswer?: boolean
 }
 
 const Question: React.FC<QuestionProps> = ({
 	question,
 	answer,
 	onAnswerChange,
-	showCorrectAnswer = false,
 }) => {
 	const handleFirstChange = (value: number) => {
 		onAnswerChange([value, answer[1]])
@@ -33,43 +29,32 @@ const Question: React.FC<QuestionProps> = ({
 	const renderOptions = (
 		selectedValue: number,
 		onChange: (value: number) => void,
-		name: string,
-		correctValue?: number
+		name: string
 	) => {
-		return question.options.map(option => {
-			const isSelected = selectedValue === option.value
-			const isCorrect = showCorrectAnswer && correctValue === option.value
-			const isWrong =
-				showCorrectAnswer && isSelected && selectedValue !== correctValue
+		return question.options.map(option => (
+			<label key={`${name}-${option.value}`} className={styles.option}>
+				<input
+					type='radio'
+					name={name}
+					value={option.value}
+					checked={selectedValue === option.value}
+					onChange={() => onChange(option.value)}
+				/>
+				<span>{option.label}</span>
+			</label>
+		))
+	}
 
-			return (
-				<label
-					key={`${name}-${option.value}`}
-					className={`
-            ${styles.option} 
-            ${isSelected ? styles.selected : ''}
-            ${isCorrect ? styles.correct : ''}
-            ${isWrong ? styles.wrong : ''}
-          `}
-				>
-					<input
-						type='radio'
-						name={name}
-						value={option.value}
-						checked={isSelected}
-						onChange={() => onChange(option.value)}
-						disabled={showCorrectAnswer}
-					/>
-					<span>{option.label}</span>
-					{showCorrectAnswer && isCorrect && (
-						<span className={styles.correctMarker}> ✓</span>
-					)}
-					{showCorrectAnswer && isWrong && (
-						<span className={styles.wrongMarker}> ✗</span>
-					)}
-				</label>
-			)
-		})
+	const getImageUrl = (url: string | undefined): string => {
+		if (!url) return ''
+
+		const base = import.meta.env.BASE_URL
+
+		if (url.startsWith(base)) {
+			return url
+		}
+
+		return `${base}${url}`
 	}
 
 	return (
@@ -80,20 +65,18 @@ const Question: React.FC<QuestionProps> = ({
 			{question.imageUrl && (
 				<div className={styles.imageContainer}>
 					<img
-						src={question.imageUrl}
+						src={getImageUrl(question.imageUrl)}
 						alt='Иллюстрация к вопросу'
 						onError={e => {
 							const target = e.target as HTMLImageElement
 							target.style.display = 'none'
-							target.parentElement!.style.display = 'none'
+							const parent = target.parentElement
+							if (parent) {
+								parent.style.display = 'none'
+							}
 						}}
+						loading='lazy'
 					/>
-				</div>
-			)}
-
-			{showCorrectAnswer && (
-				<div className={styles.correctAnswerBanner}>
-					Правильный ответ выделен зеленым цветом
 				</div>
 			)}
 
@@ -103,12 +86,7 @@ const Question: React.FC<QuestionProps> = ({
 						{question.physicalQuantities[0]}
 					</h4>
 					<div className={styles.options}>
-						{renderOptions(
-							answer[0],
-							handleFirstChange,
-							'first',
-							showCorrectAnswer ? question.correctAnswer[0] : undefined
-						)}
+						{renderOptions(answer[0], handleFirstChange, 'first')}
 					</div>
 				</div>
 
@@ -117,12 +95,7 @@ const Question: React.FC<QuestionProps> = ({
 						{question.physicalQuantities[1]}
 					</h4>
 					<div className={styles.options}>
-						{renderOptions(
-							answer[1],
-							handleSecondChange,
-							'second',
-							showCorrectAnswer ? question.correctAnswer[1] : undefined
-						)}
+						{renderOptions(answer[1], handleSecondChange, 'second')}
 					</div>
 				</div>
 			</div>

@@ -33,7 +33,7 @@ export const questions: Question[] = [
 			'Скорость бруска',
 			'Полная механическая энергия бруска',
 		],
-		imageUrl: '/media/image1.png',
+		imageUrl: 'media/image1.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
@@ -46,7 +46,7 @@ export const questions: Question[] = [
 		number: 4,
 		text: 'Груз, подвешенный к динамометру, с постоянной скоростью опускают в стакан, частично заполненный водой, до полного погружения груза (см. рисунок). Как в процессе погружения изменяются сила тяжести, действующая на груз, и сила давления воды на дно сосуда?',
 		physicalQuantities: ['Сила тяжести', 'Сила давления воды на дно сосуда'],
-		imageUrl: '/media/image2.png',
+		imageUrl: 'media/image2.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
@@ -62,7 +62,7 @@ export const questions: Question[] = [
 			'Потенциальная энергия бруска',
 			'Полная механическая энергия бруска',
 		],
-		imageUrl: '/media/image1.png',
+		imageUrl: 'media/image1.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
@@ -93,7 +93,7 @@ export const questions: Question[] = [
 			'Сила тяжести, действующая на кубик',
 			'Сила давления воды на дно сосуда',
 		],
-		imageUrl: '/media/image4.png',
+		imageUrl: 'media/image4.png',
 		options: [
 			{ label: 'увеличилась', value: 1 },
 			{ label: 'уменьшилась', value: 2 },
@@ -109,7 +109,7 @@ export const questions: Question[] = [
 			'Давление воды на дно сосуда',
 			'Сила давления воды на дно сосуда',
 		],
-		imageUrl: '/media/image5.png',
+		imageUrl: 'media/image5.png',
 		options: [
 			{ label: 'увеличилась', value: 1 },
 			{ label: 'уменьшилась', value: 2 },
@@ -122,7 +122,7 @@ export const questions: Question[] = [
 		number: 9,
 		text: 'На покоящееся тело, находящееся на гладкой горизонтальной плоскости, начинают действовать две горизонтальные силы, лежащие на одной прямой (см. рисунок). Как изменяются со временем модуль скорости тела и модуль ускорения тела?',
 		physicalQuantities: ['Модуль скорости тела', 'Модуль ускорения тела'],
-		imageUrl: '/media/image6.png',
+		imageUrl: 'media/image6.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
@@ -150,7 +150,7 @@ export const questions: Question[] = [
 			'Сила тяжести, действующая на воду',
 			'Сила давления воды на дно сосуда',
 		],
-		imageUrl: '/media/image4.png',
+		imageUrl: 'media/image4.png',
 		options: [
 			{ label: 'увеличится', value: 1 },
 			{ label: 'уменьшится', value: 2 },
@@ -166,7 +166,7 @@ export const questions: Question[] = [
 			'Ускорение бруска',
 			'Полная механическая энергия бруска',
 		],
-		imageUrl: '/media/image7.png',
+		imageUrl: 'media/image7.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
@@ -209,7 +209,7 @@ export const questions: Question[] = [
 			'Плотность жидкости',
 			'Средняя скорость теплового движения частиц жидкости',
 		],
-		imageUrl: '/media/image8.png',
+		imageUrl: 'media/image8.png',
 		options: [
 			{ label: 'увеличилась', value: 1 },
 			{ label: 'уменьшилась', value: 2 },
@@ -222,7 +222,7 @@ export const questions: Question[] = [
 		number: 16,
 		text: 'Пружинный маятник совершает незатухающие гармонические колебания между точками А и В (см. рисунок). Точка О соответствует положению равновесия маятника. Как изменяются скорость бруска и потенциальная энергия пружины маятника при переходе из точки О в точку А?',
 		physicalQuantities: ['Скорость бруска', 'Потенциальная энергия пружины'],
-		imageUrl: '/media/image9.png',
+		imageUrl: 'media/image9.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
@@ -235,7 +235,7 @@ export const questions: Question[] = [
 		number: 17,
 		text: 'Груз, подвешенный к динамометру и опущенный в стакан с водой до полного погружения, с постоянной скоростью вытаскивают из воды (см. рисунок). Как в процессе выхода груза из воды изменяются сила упругости со стороны пружины и сила Архимеда, действующие на груз?',
 		physicalQuantities: ['Сила упругости', 'Сила Архимеда'],
-		imageUrl: '/media/image10.png',
+		imageUrl: 'media/image10.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
@@ -251,7 +251,7 @@ export const questions: Question[] = [
 			'Кинетическая энергия маятника',
 			'Потенциальная энергия маятника',
 		],
-		imageUrl: '/media/image11.png',
+		imageUrl: 'media/image11.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
@@ -267,7 +267,7 @@ export const questions: Question[] = [
 			'Сила тяжести, действующая на воду',
 			'Давление воды на дно сосуда',
 		],
-		imageUrl: '/media/image12.png',
+		imageUrl: 'media/image12.png',
 		options: [
 			{ label: 'увеличилась', value: 1 },
 			{ label: 'уменьшилась', value: 2 },
@@ -280,7 +280,7 @@ export const questions: Question[] = [
 		number: 20,
 		text: 'Пружинный маятник совершает незатухающие гармонические колебания между точками А и В (см. рисунок). Точка О соответствует положению равновесия маятника. Как изменяются скорость бруска и потенциальная энергия пружины маятника при переходе из точки В в точку О?',
 		physicalQuantities: ['Скорость бруска', 'Потенциальная энергия пружины'],
-		imageUrl: '/media/image9.png',
+		imageUrl: 'media/image9.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
@@ -293,7 +293,7 @@ export const questions: Question[] = [
 		number: 21,
 		text: 'Муха сидела на равномерно вращающемся диске в точке А, а затем перелетела в точку В и села там (см. рисунок). Как в результате этого перемещения изменились линейная скорость мухи и частота её обращения на диске вокруг оси О?',
 		physicalQuantities: ['Линейная скорость мухи', 'Частота обращения мухи'],
-		imageUrl: '/media/image13.png',
+		imageUrl: 'media/image13.png',
 		options: [
 			{ label: 'увеличилась', value: 1 },
 			{ label: 'уменьшилась', value: 2 },
@@ -348,7 +348,7 @@ export const questions: Question[] = [
 		number: 25,
 		text: 'В цилиндре под герметичным поршнем находится газ (см. рисунок). Поршень перемещают вниз. Температура газа поддерживается постоянной. Как по мере перемещения поршня изменяются давление газа и его объём?',
 		physicalQuantities: ['Давление газа', 'Объём газа'],
-		imageUrl: '/media/image14.png',
+		imageUrl: 'media/image14.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
@@ -415,7 +415,7 @@ export const questions: Question[] = [
 		number: 30,
 		text: '2 л воды перелили из сосуда 1 в сосуд 2. Площади дна сосудов одинаковы (см. рисунок). Как при этом изменились давление и сила давления воды на дно сосуда?',
 		physicalQuantities: ['Давление воды', 'Сила давления воды'],
-		imageUrl: '/media/image15.png',
+		imageUrl: 'media/image15.png',
 		options: [
 			{ label: 'увеличилась', value: 1 },
 			{ label: 'уменьшилась', value: 2 },
@@ -446,7 +446,7 @@ export const questions: Question[] = [
 			'Сила тяжести, действующая на воду',
 			'Сила давления воды на дно сосуда',
 		],
-		imageUrl: '/media/image16.png',
+		imageUrl: 'media/image16.png',
 		options: [
 			{ label: 'увеличилась', value: 1 },
 			{ label: 'уменьшилась', value: 2 },
@@ -462,7 +462,7 @@ export const questions: Question[] = [
 			'Сила тяжести, действующая на груз',
 			'Сила упругости, действующая на груз',
 		],
-		imageUrl: '/media/image17.png',
+		imageUrl: 'media/image17.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
@@ -493,7 +493,7 @@ export const questions: Question[] = [
 			'Плотность шарика',
 			'Средняя кинетическая энергия теплового движения частиц',
 		],
-		imageUrl: '/media/image18.png',
+		imageUrl: 'media/image18.png',
 		options: [
 			{ label: 'увеличилась', value: 1 },
 			{ label: 'уменьшилась', value: 2 },
@@ -524,7 +524,7 @@ export const questions: Question[] = [
 			'Выталкивающая сила, действующая на груз',
 			'Сила давления воды на дно сосуда',
 		],
-		imageUrl: '/media/image19.png',
+		imageUrl: 'media/image19.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
@@ -540,7 +540,7 @@ export const questions: Question[] = [
 			'Полная механическая энергия маятника',
 			'Потенциальная энергия маятника',
 		],
-		imageUrl: '/media/image20.png',
+		imageUrl: 'media/image20.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
@@ -553,7 +553,7 @@ export const questions: Question[] = [
 		number: 39,
 		text: 'В инерциальной системе отсчёта брусок, которому сообщили начальную скорость, скользит вверх по наклонной плоскости (см. рисунок). Как изменяются по мере подъёма ускорение бруска и его кинетическая энергия?',
 		physicalQuantities: ['Ускорение бруска', 'Кинетическая энергия бруска'],
-		imageUrl: '/media/image21.png',
+		imageUrl: 'media/image21.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
@@ -641,7 +641,7 @@ export const questions: Question[] = [
 			'Кинетическая энергия маятника',
 			'Потенциальная энергия маятника',
 		],
-		imageUrl: '/media/image22.png',
+		imageUrl: 'media/image22.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
@@ -657,7 +657,7 @@ export const questions: Question[] = [
 			'Скорость бруска',
 			'Полная механическая энергия бруска',
 		],
-		imageUrl: '/media/image23.png',
+		imageUrl: 'media/image23.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
@@ -685,7 +685,7 @@ export const questions: Question[] = [
 		number: 48,
 		text: 'Деревянный кубик опускают в сосуд, полностью заполненный водой, так что часть воды выливается через край, а кубик плавает при частичном погружении (см. рисунок). Как при этом изменяются сила тяжести, действующая на кубик, а также сила давления воды на дно сосуда?',
 		physicalQuantities: ['Сила тяжести', 'Сила давления воды на дно сосуда'],
-		imageUrl: '/media/image24.png',
+		imageUrl: 'media/image24.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
@@ -701,7 +701,7 @@ export const questions: Question[] = [
 			'Давление газа',
 			'Средняя скорость теплового движения молекул газа',
 		],
-		imageUrl: '/media/image25.png',
+		imageUrl: 'media/image25.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
@@ -714,7 +714,7 @@ export const questions: Question[] = [
 		number: 50,
 		text: 'Пружинный маятник совершает незатухающие гармонические колебания между точками А и В (см. рисунок). Точка О соответствует положению равновесия маятника. Как изменяются кинетическая и полная механическая энергия маятника при переходе из точки В в точку О?',
 		physicalQuantities: ['Кинетическая энергия', 'Полная механическая энергия'],
-		imageUrl: '/media/image26.png',
+		imageUrl: 'media/image26.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
@@ -727,7 +727,7 @@ export const questions: Question[] = [
 		number: 51,
 		text: 'В цилиндре под герметичным поршнем находится газ. Поршень перемещают вверх (см. рисунок). Температура газа поддерживается постоянной. Как изменяются при этом давление газа и его плотность?',
 		physicalQuantities: ['Давление газа', 'Плотность газа'],
-		imageUrl: '/media/image27.png',
+		imageUrl: 'media/image27.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
@@ -743,7 +743,7 @@ export const questions: Question[] = [
 			'Плотность газа',
 			'Средняя скорость движения молекул газа',
 		],
-		imageUrl: '/media/image28.png',
+		imageUrl: 'media/image28.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
@@ -771,7 +771,7 @@ export const questions: Question[] = [
 		number: 54,
 		text: 'На покоящееся тело, находящееся на гладкой горизонтальной плоскости, начинают действовать две горизонтальные силы, лежащие на одной прямой (см. рисунок). Определите, как изменяются со временем модуль ускорения тела и модуль скорости тела.',
 		physicalQuantities: ['Модуль ускорения тела', 'Модуль скорости тела'],
-		imageUrl: '/media/image29.png',
+		imageUrl: 'media/image29.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
@@ -817,7 +817,7 @@ export const questions: Question[] = [
 			'Плотность шарика',
 			'Средняя кинетическая энергия движения частиц',
 		],
-		imageUrl: '/media/image30.png',
+		imageUrl: 'media/image30.png',
 		options: [
 			{ label: 'увеличилась', value: 1 },
 			{ label: 'уменьшилась', value: 2 },
@@ -857,7 +857,7 @@ export const questions: Question[] = [
 			'Плотность жидкости',
 			'Средняя скорость движения частиц жидкости',
 		],
-		imageUrl: '/media/image31.png',
+		imageUrl: 'media/image31.png',
 		options: [
 			{ label: 'увеличилась', value: 1 },
 			{ label: 'уменьшилась', value: 2 },
@@ -918,7 +918,7 @@ export const questions: Question[] = [
 			'Сила тяжести, действующая на шар',
 			'Давление воды на дно сосуда',
 		],
-		imageUrl: '/media/image32.png',
+		imageUrl: 'media/image32.png',
 		options: [
 			{ label: 'увеличилась', value: 1 },
 			{ label: 'уменьшилась', value: 2 },
@@ -943,7 +943,7 @@ export const questions: Question[] = [
 		number: 68,
 		text: 'В инерциальной системе отсчёта брусок скользит с ускорением вниз по наклонной плоскости (см. рисунок). Как изменяются по мере спуска скорость бруска и его кинетическая энергия?',
 		physicalQuantities: ['Скорость бруска', 'Кинетическая энергия бруска'],
-		imageUrl: '/media/image33.png',
+		imageUrl: 'media/image33.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
@@ -986,7 +986,7 @@ export const questions: Question[] = [
 		number: 71,
 		text: 'На равномерно вращающемся диске жук переместился из точки А в точку В (см. рисунок). Как при этом изменились линейная скорость жука и частота его обращения вокруг оси O?',
 		physicalQuantities: ['Скорость', 'Частота'],
-		imageUrl: '/media/image34.png',
+		imageUrl: 'media/image34.png',
 		options: [
 			{ label: 'увеличилась', value: 1 },
 			{ label: 'уменьшилась', value: 2 },
@@ -1044,7 +1044,7 @@ export const questions: Question[] = [
 		number: 75,
 		text: 'Пружинный маятник совершает незатухающие гармонические колебания между точками А и В (см. рисунок). Точка О соответствует положению равновесия маятника. Как изменяются кинетическая и потенциальная энергия маятника при переходе из точки О в точку В?',
 		physicalQuantities: ['Кинетическая энергия', 'Потенциальная энергия'],
-		imageUrl: '/media/image35.png',
+		imageUrl: 'media/image35.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
