@@ -225,19 +225,19 @@ const TestComponent: React.FC = () => {
 						<span className={styles.resultLabel}>Ошибок:</span>
 						<span className={styles.resultValue}>
 							{testState.mistakeQuestions.length}
-							{testState.mistakeQuestions.length > 0 && (
-								<button
-									onClick={startMistakesReview}
-									className={styles.mistakesButton}
-								>
-									Проработать ошибки
-								</button>
-							)}
 						</span>
 					</div>
 				</div>
 
 				<div className={styles.resultsActions}>
+					{testState.mistakeQuestions.length > 0 && (
+						<button
+							onClick={startMistakesReview}
+							className={styles.mistakesButton}
+						>
+							Проработать ошибки
+						</button>
+					)}
 					<button
 						onClick={toggleShowAnswers}
 						className={styles.showAnswersButton}
