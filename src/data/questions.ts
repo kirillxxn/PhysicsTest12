@@ -33,7 +33,7 @@ export const questions: Question[] = [
 			'Скорость бруска',
 			'Полная механическая энергия бруска',
 		],
-		imageUrl: '/media/image1.png',
+		imageUrl: './media/image1.png',
 		options: [
 			{ label: 'увеличивается', value: 1 },
 			{ label: 'уменьшается', value: 2 },
