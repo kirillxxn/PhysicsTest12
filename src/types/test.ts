@@ -23,10 +23,13 @@ export type TestState = {
 	answers: { [key: number]: UserAnswer }
 	showResults: boolean
 	timeSpent: number
+	mode: 'test' | 'review' | 'mistakes'
+	mistakeQuestions: number[]
 }
 
 export type TestResults = {
 	correct: number
 	total: number
 	percentage: number
+	mistakes: number[]
 }

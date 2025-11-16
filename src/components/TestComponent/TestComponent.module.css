@@ -458,7 +458,47 @@
 	border-radius: 6px;
 	border: 1px dashed #bdc3c7;
 }
+.mistakesButton {
+	margin-left: 10px;
+	padding: 6px 12px;
+	background-color: #e74c3c;
+	color: white;
+	border: none;
+	border-radius: 6px;
+	font-size: 12px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
 
+.mistakesButton:hover {
+	background-color: #c0392b;
+}
+
+.mistakesBadge {
+	background-color: #e74c3c;
+	color: white;
+	padding: 4px 8px;
+	border-radius: 12px;
+	font-size: 14px;
+	margin-left: 10px;
+	font-weight: normal;
+}
+
+.mistakesInfo {
+	background-color: #fff3cd;
+	border: 1px solid #ffeaa7;
+	border-radius: 8px;
+	padding: 12px;
+	margin-top: 15px;
+	text-align: center;
+	color: #856404;
+	font-size: 14px;
+}
+
+.mistakeItem {
+	border-left: 4px solid #e74c3c !important;
+	background-color: #fdf2f2 !important;
+}
 /* Адаптивность */
 @media (max-width: 768px) {
 	.testContainer {

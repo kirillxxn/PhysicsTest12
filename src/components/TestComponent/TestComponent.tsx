@@ -1,28 +1,32 @@
 import React, { useState, useEffect } from 'react'
 import Question from '../Question/Question'
 import { questions } from '../../data/questions'
-import type { TestResults, UserAnswer } from '../../types/test'
+import type { TestState } from '../../types/test'
 import styles from './TestComponent.module.css'
 
-type AnswerState = {
-	[key: number]: UserAnswer
-}
-
 const TestComponent: React.FC = () => {
-	const [currentQuestion, setCurrentQuestion] = useState<number>(0)
-	const [answers, setAnswers] = useState<AnswerState>({})
-	const [showResults, setShowResults] = useState<boolean>(false)
-	const [timeSpent, setTimeSpent] = useState<number>(0)
+	const [testState, setTestState] = useState<TestState>({
+		currentQuestion: 0,
+		answers: {},
+		showResults: false,
+		timeSpent: 0,
+		mode: 'test',
+		mistakeQuestions: [],
+	})
+
 	const [showAnswers, setShowAnswers] = useState<boolean>(false)
 
 	useEffect(() => {
-		if (!showResults) {
+		if (!testState.showResults) {
 			const timer = setInterval(() => {
-				setTimeSpent(prev => prev + 1)
+				setTestState(prev => ({
+					...prev,
+					timeSpent: prev.timeSpent + 1,
+				}))
 			}, 1000)
 			return () => clearInterval(timer)
 		}
-	}, [showResults])
+	}, [testState.showResults])
 
 	const getOptionLabel = (value: number): string => {
 		const options = [
@@ -34,50 +38,116 @@ const TestComponent: React.FC = () => {
 	}
 
 	const handleAnswer = (answer: [number, number]) => {
-		const currentQuestionData = questions[currentQuestion]
+		const currentQuestionData = getCurrentQuestion()
 		const isCorrect =
 			answer[0] === currentQuestionData.correctAnswer[0] &&
 			answer[1] === currentQuestionData.correctAnswer[1]
 
-		setAnswers(prev => ({
+		setTestState(prev => ({
 			...prev,
-			[currentQuestion]: {
-				answer,
-				isCorrect,
+			answers: {
+				...prev.answers,
+				[testState.currentQuestion]: {
+					answer,
+					isCorrect,
+				},
 			},
 		}))
 	}
 
+	const getCurrentQuestion = () => {
+		if (testState.mode === 'mistakes') {
+			return questions[testState.mistakeQuestions[testState.currentQuestion]]
+		}
+		return questions[testState.currentQuestion]
+	}
+
+	const getTotalQuestions = () => {
+		if (testState.mode === 'mistakes') {
+			return testState.mistakeQuestions.length
+		}
+		return questions.length
+	}
+
 	const nextQuestion = () => {
-		if (currentQuestion < questions.length - 1) {
-			setCurrentQuestion(prev => prev + 1)
+		const total = getTotalQuestions()
+		if (testState.currentQuestion < total - 1) {
+			setTestState(prev => ({
+				...prev,
+				currentQuestion: prev.currentQuestion + 1,
+			}))
 		} else {
-			setShowResults(true)
+			if (testState.mode === 'test') {
+				calculateResults()
+			} else {
+				setTestState(prev => ({
+					...prev,
+					showResults: true,
+				}))
+			}
 		}
 	}
 
 	const prevQuestion = () => {
-		if (currentQuestion > 0) {
-			setCurrentQuestion(prev => prev - 1)
+		if (testState.currentQuestion > 0) {
+			setTestState(prev => ({
+				...prev,
+				currentQuestion: prev.currentQuestion - 1,
+			}))
 		}
 	}
 
 	const goToQuestion = (index: number) => {
-		setCurrentQuestion(index)
+		setTestState(prev => ({
+			...prev,
+			currentQuestion: index,
+		}))
 	}
 
-	const calculateResults = (): TestResults => {
-		let correct = 0
-		Object.values(answers).forEach(answer => {
-			if (answer.isCorrect) {
-				correct++
+	const calculateResults = () => {
+		const mistakes: number[] = []
+
+		questions.forEach((_, index) => {
+			const answer = testState.answers[index]
+			if (!answer || !answer.isCorrect) {
+				mistakes.push(index)
 			}
 		})
 
-		const total = questions.length
-		const percentage = Math.round((correct / total) * 100)
+		setTestState(prev => ({
+			...prev,
+			showResults: true,
+			mistakeQuestions: mistakes,
+		}))
+	}
 
-		return { correct, total, percentage }
+	const startMistakesReview = () => {
+		if (testState.mistakeQuestions.length === 0) {
+			alert('У вас нет ошибок для повторения! 🎉')
+			return
+		}
+
+		setTestState({
+			currentQuestion: 0,
+			answers: {},
+			showResults: false,
+			timeSpent: 0,
+			mode: 'mistakes',
+			mistakeQuestions: testState.mistakeQuestions,
+		})
+		setShowAnswers(false)
+	}
+
+	const restartTest = () => {
+		setTestState({
+			currentQuestion: 0,
+			answers: {},
+			showResults: false,
+			timeSpent: 0,
+			mode: 'test',
+			mistakeQuestions: [],
+		})
+		setShowAnswers(false)
 	}
 
 	const formatTime = (seconds: number): string => {
@@ -93,13 +163,31 @@ const TestComponent: React.FC = () => {
 	const getQuestionStatus = (
 		index: number
 	): 'correct' | 'incorrect' | 'unanswered' | 'current' => {
-		if (index === currentQuestion) return 'current'
-		if (!answers[index]) return 'unanswered'
-		return answers[index].isCorrect ? 'correct' : 'incorrect'
+		if (testState.mode === 'mistakes') {
+			const originalIndex = testState.mistakeQuestions[index]
+			if (index === testState.currentQuestion) return 'current'
+			if (!testState.answers[originalIndex]) return 'unanswered'
+			return testState.answers[originalIndex].isCorrect
+				? 'correct'
+				: 'incorrect'
+		}
+
+		if (index === testState.currentQuestion) return 'current'
+		if (!testState.answers[index]) return 'unanswered'
+		return testState.answers[index].isCorrect ? 'correct' : 'incorrect'
 	}
 
-	if (showResults) {
-		const { correct, total, percentage } = calculateResults()
+	const getQuestionNumber = (index: number): number => {
+		if (testState.mode === 'mistakes') {
+			return testState.mistakeQuestions[index] + 1
+		}
+		return index + 1
+	}
+
+	if (testState.showResults) {
+		const total = questions.length
+		const correct = total - testState.mistakeQuestions.length
+		const percentage = Math.round((correct / total) * 100)
 
 		return (
 			<div className={styles.results}>
@@ -129,7 +217,23 @@ const TestComponent: React.FC = () => {
 					</div>
 					<div className={styles.resultItem}>
 						<span className={styles.resultLabel}>Время выполнения:</span>
-						<span className={styles.resultValue}>{formatTime(timeSpent)}</span>
+						<span className={styles.resultValue}>
+							{formatTime(testState.timeSpent)}
+						</span>
+					</div>
+					<div className={styles.resultItem}>
+						<span className={styles.resultLabel}>Ошибок:</span>
+						<span className={styles.resultValue}>
+							{testState.mistakeQuestions.length}
+							{testState.mistakeQuestions.length > 0 && (
+								<button
+									onClick={startMistakesReview}
+									className={styles.mistakesButton}
+								>
+									Проработать ошибки
+								</button>
+							)}
+						</span>
 					</div>
 				</div>
 
@@ -141,10 +245,7 @@ const TestComponent: React.FC = () => {
 						{showAnswers ? 'Скрыть ответы' : 'Показать ответы'}
 					</button>
 
-					<button
-						onClick={() => window.location.reload()}
-						className={styles.restartButton}
-					>
+					<button onClick={restartTest} className={styles.restartButton}>
 						Начать заново
 					</button>
 				</div>
@@ -154,11 +255,17 @@ const TestComponent: React.FC = () => {
 						<h3>Проверка ответов</h3>
 						<div className={styles.answersList}>
 							{questions.map((question, index) => {
-								const userAnswer = answers[index]
+								const userAnswer = testState.answers[index]
 								const isCorrect = userAnswer?.isCorrect
+								const isMistake = testState.mistakeQuestions.includes(index)
 
 								return (
-									<div key={question.id} className={styles.answerItem}>
+									<div
+										key={question.id}
+										className={`${styles.answerItem} ${
+											isMistake ? styles.mistakeItem : ''
+										}`}
+									>
 										<div className={styles.answerHeader}>
 											<span className={styles.questionNumber}>
 												Вопрос {index + 1}
@@ -236,7 +343,7 @@ const TestComponent: React.FC = () => {
 												</div>
 											</div>
 
-											{!isCorrect && userAnswer && (
+											{(!isCorrect || !userAnswer) && (
 												<div className={styles.answerColumn}>
 													<strong className={styles.correctAnswerTitle}>
 														Правильный ответ:
@@ -276,20 +383,42 @@ const TestComponent: React.FC = () => {
 		)
 	}
 
-	const currentQuestionData = questions[currentQuestion]
-	const currentAnswer: [number, number] = answers[currentQuestion]?.answer || [
-		0, 0,
-	]
+	const currentQuestionData = getCurrentQuestion()
+	const currentAnswer: [number, number] = testState.answers[
+		testState.mode === 'mistakes'
+			? testState.mistakeQuestions[testState.currentQuestion]
+			: testState.currentQuestion
+	]?.answer || [0, 0]
+
+	const totalQuestions = getTotalQuestions()
+	const currentNumber =
+		testState.mode === 'mistakes'
+			? testState.mistakeQuestions[testState.currentQuestion] + 1
+			: testState.currentQuestion + 1
 
 	return (
 		<div className={styles.testContainer}>
 			<div className={styles.header}>
-				<h1>Тест по физике</h1>
+				<h1>
+					{testState.mode === 'mistakes'
+						? 'Работа над ошибками'
+						: 'Тест по физике'}
+					{testState.mode === 'mistakes' && (
+						<span className={styles.mistakesBadge}>
+							{testState.mistakeQuestions.length} вопросов
+						</span>
+					)}
+				</h1>
 				<div className={styles.stats}>
 					<div className={styles.progress}>
-						Вопрос {currentQuestion + 1} из {questions.length}
+						Вопрос {currentNumber} из{' '}
+						{testState.mode === 'mistakes'
+							? testState.mistakeQuestions.length
+							: questions.length}
 					</div>
-					<div className={styles.timer}>Время: {formatTime(timeSpent)}</div>
+					<div className={styles.timer}>
+						Время: {formatTime(testState.timeSpent)}
+					</div>
 				</div>
 			</div>
 
@@ -297,13 +426,18 @@ const TestComponent: React.FC = () => {
 				<div
 					className={styles.progressFill}
 					style={{
-						width: `${((currentQuestion + 1) / questions.length) * 100}%`,
+						width: `${
+							((testState.currentQuestion + 1) / totalQuestions) * 100
+						}%`,
 					}}
 				></div>
 			</div>
 
 			<Question
-				question={currentQuestionData}
+				question={{
+					...currentQuestionData,
+					number: currentNumber,
+				}}
 				answer={currentAnswer}
 				onAnswerChange={handleAnswer}
 			/>
@@ -311,35 +445,42 @@ const TestComponent: React.FC = () => {
 			<div className={styles.navigation}>
 				<button
 					onClick={prevQuestion}
-					disabled={currentQuestion === 0}
+					disabled={testState.currentQuestion === 0}
 					className={styles.navButton}
 				>
 					← Назад
 				</button>
 
 				<div className={styles.questionGrid}>
-					{questions.map((_, index) => {
-						const status = getQuestionStatus(index)
-						return (
-							<button
-								key={index}
-								onClick={() => goToQuestion(index)}
-								className={`
-                  ${styles.questionButton} 
-                  ${styles[status]}
-                `}
-								title={`Вопрос ${index + 1}`}
-							>
-								{index + 1}
-							</button>
-						)
-					})}
+					{Array.from({ length: totalQuestions }, (_, index) => (
+						<button
+							key={index}
+							onClick={() => goToQuestion(index)}
+							className={`
+                ${styles.questionButton} 
+                ${styles[getQuestionStatus(index)]}
+              `}
+							title={`Вопрос ${getQuestionNumber(index)}`}
+						>
+							{getQuestionNumber(index)}
+						</button>
+					))}
 				</div>
 
 				<button onClick={nextQuestion} className={styles.navButton}>
-					{currentQuestion === questions.length - 1 ? 'Завершить' : 'Далее →'}
+					{testState.currentQuestion === totalQuestions - 1
+						? 'Завершить'
+						: 'Далее →'}
 				</button>
 			</div>
+
+			{testState.mode === 'mistakes' && (
+				<div className={styles.mistakesInfo}>
+					<strong>Режим работы над ошибками:</strong>
+					<br />
+					Вы повторяете вопросы, в которых допустили ошибки в основном тесте
+				</div>
+			)}
 		</div>
 	)
 }
