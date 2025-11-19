@@ -17,7 +17,6 @@ const TestComponent: React.FC = () => {
 	const [showAnswers, setShowAnswers] = useState<boolean>(false)
 	const testContainerRef = useRef<HTMLDivElement>(null)
 
-	// Функция для прокрутки наверх
 	const scrollToTop = () => {
 		if (testContainerRef.current) {
 			testContainerRef.current.scrollIntoView({
@@ -30,12 +29,10 @@ const TestComponent: React.FC = () => {
 	}
 
 	useEffect(() => {
-		// Прокручиваем наверх при изменении текущего вопроса
 		scrollToTop()
 	}, [testState.currentQuestion])
 
 	useEffect(() => {
-		// Прокручиваем наверх при показе результатов
 		if (testState.showResults) {
 			scrollToTop()
 		}
